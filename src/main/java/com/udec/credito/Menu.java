@@ -17,8 +17,11 @@ public class Menu {
     private boolean salir = false;
     private int opcion;
     private String cedula;
+    private String nombre;
+    private int cedu;
+    private int edad;
+    private String genero;
     Scanner sn = new Scanner(System.in);
-    Persona persona=new Persona();
     ArrayList<Persona> listaPersonas = new ArrayList<>();
     public Menu(){ 
         while (salir==false) {   
@@ -61,20 +64,16 @@ public class Menu {
     public void crearPersona(){
         System.out.println("Nombre:");
         sn.nextLine();
-        persona.setNombre(sn.nextLine());
+        nombre=sn.nextLine();
         System.out.println("Cedula:");
-        persona.setCedula(sn.nextInt());
+        cedu=(sn.nextInt());
         System.out.println("Edad:");
-        persona.setEdad(sn.nextInt());
+        edad=(sn.nextInt());
         System.out.println("Genero (M/F):");
         sn.nextLine();
-        persona.setGenero(sn.nextLine());
-        System.out.println("Persona creada: ");
-        System.out.println("Nombre: " + persona.getNombre());
-        System.out.println("Cedula: " + persona.getCedula());
-        System.out.println("Edad: " + persona.getEdad());
-        System.out.println("Genero: " + persona.getGenero());
-        listaPersonas.add(persona);
+        genero=(sn.nextLine());
+        Persona p =new Persona(nombre, cedu, edad, genero);
+        listaPersonas.add(p);
     }
     public void editarPersona(){
         System.out.println(" Ingrese la la cedula del usuario a editar");
@@ -84,12 +83,10 @@ public class Menu {
             if (cedula.equals(Integer.toString(p.getCedula()))) {
                 
                 System.out.println("Persona creada: ");
-                System.out.println("Nombre: " + persona.getNombre());
-                System.out.println("Cedula: " + persona.getCedula());
-                System.out.println("Edad: " + persona.getEdad());
-                System.out.println("Genero: " + persona.getGenero());
-                
-                
+                System.out.println("Nombre: " + p.getNombre());
+                System.out.println("Cedula: " + p.getCedula());
+                System.out.println("Edad: " + p.getEdad());
+                System.out.println("Genero: " + p.getGenero());
             }
         }
     }
