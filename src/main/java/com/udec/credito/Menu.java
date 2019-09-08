@@ -26,6 +26,7 @@ public class Menu {
     private Date fecha;
     private String descripcion;
     private String fechaComoTexto;
+    private Byte o;
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
     private String tipo;
     Scanner sn = new Scanner(System.in);
@@ -78,9 +79,12 @@ public class Menu {
         cedu=(sn.nextInt());
         System.out.println("Edad:");
         edad=(sn.nextInt());
-        System.out.println("Genero (M/F):");
+        System.out.println("Genero (1.Masculino 2.Femenino):");
         sn.nextLine();
-        genero=(sn.nextLine());
+        if((o =(sn.nextByte()))==1){
+            genero="Masculino";
+        }else if ((o =(sn.nextByte()))==2)
+            genero="Femenino";
         Persona p =new Persona(nombre, cedu, edad, genero);
         listaPersonas.add(p);
     }
@@ -92,7 +96,7 @@ public class Menu {
         for (Persona p : listaPersonas) {
             if (cedula.equals(Integer.toString(p.getCedula()))) {
                 
-                System.out.println("Persona creada: ");
+                System.out.println("Datos actuales de la persona editar: ");
                 System.out.println("Nombre: " + p.getNombre());
                 System.out.println("Cedula: " + p.getCedula());
                 System.out.println("Edad: " + p.getEdad());
@@ -101,7 +105,7 @@ public class Menu {
         }
     }
     public void agregarAntecedente() {
-        System.out.println(" Ingrese la la cedula del usuario a editar");
+        System.out.println("Ingrese la la cedula del usuario a editar");
         sn.nextLine();
         cedula = sn.nextLine();
         for (Persona p : listaPersonas) {
@@ -120,6 +124,10 @@ public class Menu {
                 System.out.println("Ingrese el tipo (Negativo/Positivo): ");
                 sn.nextLine(); tipo= sn.nextLine();
                 Antecedentes a = new Antecedentes(fecha, descripcion, tipo);
+                antecedentes.add(a);
+                Persona pa =new Persona(p.getNombre(), p.getCedula(), p.getEdad(), p.getGenero(), antecedentes);
+                listaPersonas.remove(p);
+                listaPersonas.add(pa);
                                 
             }
         }
