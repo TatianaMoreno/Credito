@@ -18,16 +18,18 @@ public class Persona {
     private int cedula;
     private int edad;
     private String genero;
-    private ArrayList<Antecedentes>antecedentes;
+    private Antecedentes antecedentes;
     public Persona(){};
 
-    public Persona(String nombre, int cedula, int edad, String genero, ArrayList<Antecedentes> antecedentes) {
+    public Persona(String nombre, int cedula, int edad, String genero, Antecedentes antecedentes) {
         this.nombre = nombre;
         this.cedula = cedula;
         this.edad = edad;
         this.genero = genero;
         this.antecedentes = antecedentes;
     }
+
+    
 
     public Persona(String nombre, int cedula, int edad, String genero) {
         this.nombre = nombre;
@@ -67,14 +69,16 @@ public class Persona {
     public void setGenero(String genero) {
         this.genero = genero;
     }
-    
-    public ArrayList<Antecedentes> getAntecedentes() {
+
+    public Antecedentes getAntecedentes() {
         return antecedentes;
     }
 
-    public void setAntecedentes(ArrayList<Antecedentes> antecedentes) {
+    public void setAntecedentes(Antecedentes antecedentes) {
         this.antecedentes = antecedentes;
     }
+    
+    
     
     
 }

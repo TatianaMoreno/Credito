@@ -31,7 +31,7 @@ public class Menu {
     private String tipo;
     Scanner sn = new Scanner(System.in);
     ArrayList<Persona> listaPersonas = new ArrayList<>();
-    ArrayList<Antecedentes> antecedentes = new ArrayList<>();
+    ArrayList<TipoAntecedente> listaTipoAntecedentes = new ArrayList<>();
     public Menu() { 
         while (salir==false) {   
 
@@ -39,30 +39,34 @@ public class Menu {
 
             System.out.println(" MENU DE  ");
 
-            System.out.println(" 1 - Crear una persona ");
+            System.out.println(" 1 - Crear una persona. ");
 
-            System.out.println(" 2 - Editar una persona");
-
-            System.out.println(" 3 - Agregar un atecedente a un usuario");
-
-            System.out.println(" 4 - Eliminar antecedentes de un usuario ");
+            System.out.println(" 2 - Editar una persona.");
             
-            System.out.println(" 5 - Visualizar los antecedentes de un usuario ");
+            System.out.println(" 3 - Agregar un tipo de antecedente.");
+
+            System.out.println(" 4 - Agregar un atecedente a un usuario.");
+
+            System.out.println(" 5 - Eliminar antecedentes de un usuario. ");
             
-            System.out.println(" 6 - Salir ");
+            System.out.println(" 6 - Visualizar los antecedentes de un usuario. ");
+            
+            System.out.println(" 7 - Salir ");
             opcion = sn.nextInt();
             switch (opcion) {
                     case 1: crearPersona();
                         break;
                     case 2: editarPersona();
                         break;
-                    case 3: agregarAntecedente();
+                    case 3: crearTipoAntecedentes();
                         break;
-                    case 4: 
+                    case 4: agregarAntecedente();
                         break;
-                    case 5: vizualizarAntecedentes();
+                    case 5: eliminarAntecedentes();
                         break;
-                    case 6: salir();
+                    case 6: vizualizarAntecedentes();
+                        break;
+                    case 7: salir();
                         break;
                     default:
                         System.out.println("Solo números entre 1 y 4");
@@ -104,30 +108,29 @@ public class Menu {
             }
         }
     }
+    
+    
+    public void crearTipoAntecedentes(){
+        
+    }
+    
     public void agregarAntecedente() {
-        System.out.println("Ingrese la la cedula del usuario a editar");
+        System.out.println("Ingrese la la cedula del usuario al que desea agregra antecedentes");
         sn.nextLine();
         cedula = sn.nextLine();
         for (Persona p : listaPersonas) {
             if (cedula.equals(Integer.toString(p.getCedula()))) {
                 
-                System.out.println("Persona creada: ");
+                System.out.println("Persona a agreagar antecedentes: ");
                 System.out.println("Nombre: " + p.getNombre());
                 System.out.println("Cedula: " + p.getCedula());
                 System.out.println("Edad: " + p.getEdad());
                 System.out.println("Genero: " + p.getGenero());
                 System.out.println("Ingrese la fecha del antecedente (dia/mes/año): ");
-                sn.nextLine();
                 fechaComoTexto  = sn.nextLine();
-                System.out.println("Ingrese la descripcion: ");
-                sn.nextLine(); descripcion= sn.nextLine();
-                System.out.println("Ingrese el tipo (Negativo/Positivo): ");
-                sn.nextLine(); tipo= sn.nextLine();
-                Antecedentes a = new Antecedentes(fecha, descripcion, tipo);
-                antecedentes.add(a);
-                Persona pa =new Persona(p.getNombre(), p.getCedula(), p.getEdad(), p.getGenero(), antecedentes);
-                listaPersonas.remove(p);
-                listaPersonas.add(pa);
+                System.out.println("Ingrese la descripcion: "); descripcion= sn.nextLine();
+                System.out.println("Ingrese el tipo (Negativo/Positivo): "); tipo= sn.nextLine();
+                 
                                 
             }
         }
@@ -139,12 +142,28 @@ public class Menu {
         cedula = sn.nextLine();
         for (Persona p : listaPersonas) {
             if (cedula.equals(Integer.toString(p.getCedula()))) {
-                System.out.println("Persona creada: ");
+                System.out.println("Persona : ");
                 System.out.println("Nombre: " + p.getNombre());
                 System.out.println("Cedula: " + p.getCedula());
                 System.out.println("Edad: " + p.getEdad());
                 System.out.println("Genero: " + p.getGenero());
                 System.out.println("Antecedentes: " + p.getAntecedentes());
+            }
+        }
+    }
+    
+    public void eliminarAntecedentes(){
+        System.out.println("Ingrese la la cedula del usuario al que desea elimanar antecedentes ");
+        sn.nextLine();
+        cedula = sn.nextLine();
+        for (Persona p : listaPersonas) {
+            if (cedula.equals(Integer.toString(p.getCedula()))) {
+                
+                System.out.println("Persona creada: ");
+                System.out.println("Nombre: " + p.getNombre());
+                System.out.println("Cedula: " + p.getCedula());
+                System.out.println("Edad: " + p.getEdad());
+                System.out.println("Genero: " + p.getGenero());
             }
         }
     }

@@ -5,31 +5,22 @@
  */
 package com.udec.credito;
 
-import java.util.Date;
-
 /**
  *
  * @author tmore
  */
-public class Antecedentes {
-    private Date fecha;
+public class TipoAntecedente {
     private String descripcion;
-    private TipoAntecedente tipo;
+    private String nombreCaracteristico;
+    private String tipo;
 
-    public Antecedentes(Date fecha, String descripcion, TipoAntecedente tipo) {
-        this.fecha = fecha;
+    public TipoAntecedente(String descripcion, String nombreCaracteristico, String tipo) {
         this.descripcion = descripcion;
+        this.nombreCaracteristico = nombreCaracteristico;
         this.tipo = tipo;
     }
 
     
-    public Date getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
-    }
 
     public String getDescripcion() {
         return descripcion;
@@ -39,15 +30,20 @@ public class Antecedentes {
         this.descripcion = descripcion;
     }
 
-    public TipoAntecedente getTipo() {
+    public String getNombreCaracteristico() {
+        return nombreCaracteristico;
+    }
+
+    public void setNombreCaracteristico(String nombreCaracteristico) {
+        this.nombreCaracteristico = nombreCaracteristico;
+    }
+
+    public String getTipo() {
         return tipo;
     }
 
-    public void setTipo(TipoAntecedente tipo) {
+    public void setTipo(String tipo) {
         this.tipo = tipo;
     }
-
-  
-    
     
 }
