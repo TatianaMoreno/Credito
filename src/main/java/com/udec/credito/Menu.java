@@ -5,7 +5,9 @@
  */
 package com.udec.credito;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
 
 /**
@@ -21,39 +23,45 @@ public class Menu {
     private int cedu;
     private int edad;
     private String genero;
+    private Date fecha;
+    private String descripcion;
+    private String fechaComoTexto;
+    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+    private String tipo;
     Scanner sn = new Scanner(System.in);
     ArrayList<Persona> listaPersonas = new ArrayList<>();
-    public Menu(){ 
+    ArrayList<Antecedentes> antecedentes = new ArrayList<>();
+    public Menu() { 
         while (salir==false) {   
 
             // Le indicamos al usuario cuales son sus opciones:
 
             System.out.println(" MENU DE  ");
 
-            System.out.println(" 1 - Crear un usuario ");
+            System.out.println(" 1 - Crear una persona ");
 
-            System.out.println(" 2 - Editar un usaurio");
+            System.out.println(" 2 - Editar una persona");
 
             System.out.println(" 3 - Agregar un atecedente a un usuario");
 
             System.out.println(" 4 - Eliminar antecedentes de un usuario ");
             
-            System.out.println(" 5 - visualizar los antecedentes de un usuario ");
+            System.out.println(" 5 - Visualizar los antecedentes de un usuario ");
             
-            System.out.println(" 0 - Salir ");
+            System.out.println(" 6 - Salir ");
             opcion = sn.nextInt();
             switch (opcion) {
                     case 1: crearPersona();
                         break;
                     case 2: editarPersona();
                         break;
-                    case 3: 
+                    case 3: agregarAntecedente();
                         break;
                     case 4: 
                         break;
-                    case 5: 
+                    case 5: vizualizarAntecedentes();
                         break;
-                    case 6: 
+                    case 6: salir();
                         break;
                     default:
                         System.out.println("Solo números entre 1 y 4");
@@ -61,6 +69,7 @@ public class Menu {
                                 
         }
     }
+    //Metodo para agreagr a un usuario.
     public void crearPersona(){
         System.out.println("Nombre:");
         sn.nextLine();
@@ -75,6 +84,7 @@ public class Menu {
         Persona p =new Persona(nombre, cedu, edad, genero);
         listaPersonas.add(p);
     }
+    //Metodo para editar a un usuario que solo permite cambiar la edad, nombre y genero.
     public void editarPersona(){
         System.out.println(" Ingrese la la cedula del usuario a editar");
         sn.nextLine();
@@ -90,8 +100,50 @@ public class Menu {
             }
         }
     }
+    public void agregarAntecedente() {
+        System.out.println(" Ingrese la la cedula del usuario a editar");
+        sn.nextLine();
+        cedula = sn.nextLine();
+        for (Persona p : listaPersonas) {
+            if (cedula.equals(Integer.toString(p.getCedula()))) {
+                
+                System.out.println("Persona creada: ");
+                System.out.println("Nombre: " + p.getNombre());
+                System.out.println("Cedula: " + p.getCedula());
+                System.out.println("Edad: " + p.getEdad());
+                System.out.println("Genero: " + p.getGenero());
+                System.out.println("Ingrese la fecha del antecedente (dia/mes/año): ");
+                sn.nextLine();
+                fechaComoTexto  = sn.nextLine();
+                System.out.println("Ingrese la descripcion: ");
+                sn.nextLine(); descripcion= sn.nextLine();
+                System.out.println("Ingrese el tipo (Negativo/Positivo): ");
+                sn.nextLine(); tipo= sn.nextLine();
+                Antecedentes a = new Antecedentes(fecha, descripcion, tipo);
+                                
+            }
+        }
+    }
+    
+    public void vizualizarAntecedentes(){
+        System.out.println(" Ingrese la la cedula del usuario a editar");
+        sn.nextLine();
+        cedula = sn.nextLine();
+        for (Persona p : listaPersonas) {
+            if (cedula.equals(Integer.toString(p.getCedula()))) {
+                System.out.println("Persona creada: ");
+                System.out.println("Nombre: " + p.getNombre());
+                System.out.println("Cedula: " + p.getCedula());
+                System.out.println("Edad: " + p.getEdad());
+                System.out.println("Genero: " + p.getGenero());
+                System.out.println("Antecedentes: " + p.getAntecedentes());
+            }
+        }
+    }
+    
     public void salir(){
         salir = true;
+        System.out.println("Gracias por usar nuestro software");
         System.out.println("Saliendo del programa");
 
     }
