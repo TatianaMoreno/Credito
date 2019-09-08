@@ -6,6 +6,7 @@
 package com.udec.credito;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -18,10 +19,10 @@ public class Persona {
     private int cedula;
     private int edad;
     private String genero;
-    private Antecedentes antecedentes;
+    private List<Antecedentes> antecedentes;
     public Persona(){};
 
-    public Persona(String nombre, int cedula, int edad, String genero, Antecedentes antecedentes) {
+    public Persona(String nombre, int cedula, int edad, String genero, List<Antecedentes> antecedentes) {
         this.nombre = nombre;
         this.cedula = cedula;
         this.edad = edad;
@@ -29,6 +30,7 @@ public class Persona {
         this.antecedentes = antecedentes;
     }
 
+    
     
 
     public Persona(String nombre, int cedula, int edad, String genero) {
@@ -70,13 +72,15 @@ public class Persona {
         this.genero = genero;
     }
 
-    public Antecedentes getAntecedentes() {
+    public List<Antecedentes> getAntecedentes() {
         return antecedentes;
     }
 
-    public void setAntecedentes(Antecedentes antecedentes) {
+    public void setAntecedentes(List<Antecedentes> antecedentes) {
         this.antecedentes = antecedentes;
     }
+
+    
     
     
     

@@ -26,9 +26,10 @@ public class Menu {
     private Date fecha;
     private String descripcion;
     private String fechaComoTexto;
-    private Byte o;
-    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+    private Byte o,e;
+    private String nombreCaracteristico;
     private String tipo;
+    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
     Scanner sn = new Scanner(System.in);
     ArrayList<Persona> listaPersonas = new ArrayList<>();
     ArrayList<TipoAntecedente> listaTipoAntecedentes = new ArrayList<>();
@@ -89,7 +90,7 @@ public class Menu {
             genero="Masculino";
         }else if ((o =(sn.nextByte()))==2)
             genero="Femenino";
-        Persona p =new Persona(nombre, cedu, edad, genero);
+        Persona p =new Persona(nombre, cedu, edad, genero,null);
         listaPersonas.add(p);
     }
     //Metodo para editar a un usuario que solo permite cambiar la edad, nombre y genero.
@@ -99,19 +100,46 @@ public class Menu {
         cedula = sn.nextLine();
         for (Persona p : listaPersonas) {
             if (cedula.equals(Integer.toString(p.getCedula()))) {
-                
                 System.out.println("Datos actuales de la persona editar: ");
                 System.out.println("Nombre: " + p.getNombre());
                 System.out.println("Cedula: " + p.getCedula());
                 System.out.println("Edad: " + p.getEdad());
                 System.out.println("Genero: " + p.getGenero());
+                System.out.println("Que gustaria editar en la persona\n 1.Nombre\n 2.Edad\n 3.Genero");
+                switch (o=sn.nextByte()) {
+                    case 1: System.out.println("Nuevo nombre: ");
+                        p.setNombre(sn.nextLine());
+                        break;
+                    case 2:System.out.println("Nueva Edad:");
+                        p.setEdad(sn.nextInt());
+                        break;
+                    case 3 :System.out.println("Nuevo genero (1.Masculino 2.Femenino):");
+                        if((o =(sn.nextByte()))==1){
+                         genero="Masculino";
+                        }else if ((o =(sn.nextByte()))==2)
+                            genero="Femenino";
+                        p.setGenero(genero);
+                        break;
+                }
             }
         }
     }
     
     
     public void crearTipoAntecedentes(){
-        
+        System.out.println("Nombre Caracteristico:");
+        sn.nextLine();
+        nombre=sn.nextLine();
+        System.out.println("descripcion:");
+        sn.nextLine();descripcion=sn.nextLine();
+        System.out.println("Tipo (1.Positivo 2.Negativo):");
+        sn.nextLine();
+        if((o =(sn.nextByte()))==1){
+            tipo="Positivo";
+        }else if ((o =(sn.nextByte()))==2)
+            tipo="Negativo";
+        TipoAntecedente ta=new TipoAntecedente(descripcion,nombre, tipo);
+        listaTipoAntecedentes.add(ta);
     }
     
     public void agregarAntecedente() {
