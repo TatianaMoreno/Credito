@@ -14,8 +14,9 @@ import java.util.Scanner;
  */
 public class Menu {
     // El while será ejecutado hasta que salir sea TRUE.
-    boolean salir = false;
-    int opcion;
+    private boolean salir = false;
+    private int opcion;
+    private String cedula;
     Scanner sn = new Scanner(System.in);
     Persona persona=new Persona();
     ArrayList<Persona> listaPersonas = new ArrayList<>();
@@ -76,6 +77,25 @@ public class Menu {
         listaPersonas.add(persona);
     }
     public void editarPersona(){
-        
+        System.out.println(" Ingrese la la cedula del usuario a editar");
+        sn.nextLine();
+        cedula = sn.nextLine();
+        for (Persona p : listaPersonas) {
+            if (cedula.equals(Integer.toString(p.getCedula()))) {
+                
+                System.out.println("Persona creada: ");
+                System.out.println("Nombre: " + persona.getNombre());
+                System.out.println("Cedula: " + persona.getCedula());
+                System.out.println("Edad: " + persona.getEdad());
+                System.out.println("Genero: " + persona.getGenero());
+                
+                
+            }
+        }
+    }
+    public void salir(){
+        salir = true;
+        System.out.println("Saliendo del programa");
+
     }
 }
