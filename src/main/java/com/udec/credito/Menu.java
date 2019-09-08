@@ -192,7 +192,16 @@ public class Menu {
                 System.out.println("Cedula: " + p.getCedula());
                 System.out.println("Edad: " + p.getEdad());
                 System.out.println("Genero: " + p.getGenero());
+                System.out.println("Antecedentes: " + p.getAntecedentes());
+                System.out.println("Cual antecedente desea eliminar: ");
+                edad=sn.nextInt();
+                if("Negativo".equals(p.getAntecedentes().get(edad).getTipo().getTipo())){
+                    p.getAntecedentes().remove(edad);
+                    System.out.println("Se elimino con exito.");   
+                }else
+                    System.out.println("No se pueden eliminar los antecedentes positivos.");   
             }
+            
         }
     }
     
