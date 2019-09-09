@@ -15,6 +15,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.ParseException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 /**
@@ -101,7 +103,7 @@ public class Menu {
                                 
         }
     }
-    //Metodo para agreagr a un usuario.
+    //Metodo para agregar a un usuario.
     public void crearPersona(){
         System.out.println("Nombre:");
         sn.nextLine();
@@ -121,6 +123,7 @@ public class Menu {
         listaPersonas.add(p);
         escrituraFichero();
     }
+    
     //Metodo para editar a un usuario que solo permite cambiar la edad, nombre y genero.
     public void editarPersona(){
         System.out.println(" Ingrese la la cedula del usuario a editar");
@@ -186,16 +189,30 @@ public class Menu {
                 System.out.println("Edad: " + p.getEdad());
                 System.out.println("Genero: " + p.getGenero());
                 System.out.println("Ingrese la fecha del antecedente (dia/mes/año): ");
-                fechaComoTexto  = sn.nextLine();
-                System.out.println("Ingrese la descripcion: "); descripcion= sn.nextLine();
-                System.out.println("Ingrese el tipo: "); tipo= sn.nextLine();
-                                
+                SimpleDateFormat formato = new SimpleDateFormat("yyyy/mm/dd");
+                fechaComoTexto= sn.nextLine();
+                try {
+                   fecha = formato.parse(fechaComoTexto);
+                     } catch (ParseException ex) {
+
+                  Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+                 }
+                System.out.println("Ingrese la descripcion: ");
+                descripcion  = sn.nextLine();
+                
+                System.out.println("Ingrese el tipo: "); 
+                edad  = sn.nextInt();
+                TipoAntecedente tipos=listaTipoAntecedentes.get(edad);
+                Antecedentes an = new Antecedentes(fecha, descripcion, tipos);
+                List<Antecedentes> antecedentes=p.getAntecedentes();
+                antecedentes.add(an);
+                p.setAntecedentes(antecedentes);
             }
         }
     }
     
     public void vizualizarAntecedentes(){
-        System.out.println(" Ingrese la la cedula del usuario a editar");
+        System.out.println(" Ingrese la la cedula del usuario de quien desea ver los antecedentes");
         sn.nextLine();
         cedula = sn.nextLine();
         for (Persona p : listaPersonas) {
