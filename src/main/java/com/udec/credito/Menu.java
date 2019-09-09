@@ -67,7 +67,7 @@ public class Menu {
         while (salir==false) {   
 
             // Le indicamos al usuario cuales son sus opciones:
-
+            lecturaFichero();
             System.out.println(" MENU DE  ");
 
             System.out.println(" 1 - Crear una persona. ");
@@ -86,6 +86,7 @@ public class Menu {
             opcion = sn.nextInt();
             switch (opcion) {
                     case 1: crearPersona();
+                            
                         break;
                     case 2: editarPersona();
                         break;
@@ -102,6 +103,7 @@ public class Menu {
                     default:
                         System.out.println("Solo números entre 1 y 4");
             }
+            actualizarFichero();
                                 
         }
     }
@@ -209,6 +211,8 @@ public class Menu {
                 List<Antecedentes> antecedentes=p.getAntecedentes();
                 antecedentes.add(an);
                 p.setAntecedentes(antecedentes);
+                escrituraAntecedentesFichero();
+                
             }
         }
     }
@@ -266,7 +270,22 @@ public class Menu {
             File archivo = new File("Archivos/personas.txt");
             FileWriter escritura = new FileWriter(archivo,true);
             for(Persona p : listaPersonas){
-                escritura.write(p.getNombre()+","+p.getCedula()+","+p.getEdad()+","+p.getGenero()+"; \n");
+                escritura.write(p.getNombre()+","+p.getCedula()+","+p.getEdad()+","+p.getGenero()+";");
+            }
+            escritura.close();
+            
+        } catch (IOException ex) {
+            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void escrituraAntecedentesFichero(){
+        
+        try {
+            File archivo = new File("Archivos/personas.txt");
+            FileWriter escritura = new FileWriter(archivo,true);
+            for(Persona p : listaPersonas){
+                escritura.write(p.getNombre()+","+p.getCedula()+","+p.getEdad()+","+p.getGenero()+","+p.getAntecedentes()+"; \n");
             }
             escritura.close();
             
@@ -285,7 +304,7 @@ public class Menu {
             for(i=0;i<palabra.length;i++){
                 String bufer[]=palabra[i].split(",");
                 Persona personl;
-                personl = new  Persona(bufer[0], parseInt(bufer[1]),parseInt(bufer[2]), bufer[3]/*,bufer[4]*/);
+                personl = new  Persona(bufer[0], parseInt(bufer[1]),parseInt(bufer[2]), bufer[3],(List<Antecedentes>). bufer[4]);
                 listaPersonas.add(personl);
             }
             
@@ -294,5 +313,18 @@ public class Menu {
             Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
         }
     } 
+    public void actualizarFichero(){
+        try {
+            File archivo = new File("Archivos/personas.txt");
+            FileWriter escritura = new FileWriter(archivo,false);
+            for(Persona p : listaPersonas){
+                escritura.write(p.getNombre()+","+p.getCedula()+","+p.getEdad()+","+p.getGenero()+"; \n");
+            }
+            escritura.close();
+            
+        } catch (IOException ex) {
+            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     
 }
