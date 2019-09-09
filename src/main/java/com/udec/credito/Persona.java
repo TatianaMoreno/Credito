@@ -10,18 +10,23 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- *
- * @author AndresChila
+ * Clase que se guarda los atributos de una persona
+ * @author @author Tatiana Moreno, Andres Chila
  */
 public class Persona {
-    
+    //Atributo que guarda el nombre de una persona
     private String nombre;
+    //Atributo que guarda la cedula de una persona
     private int cedula;
+    //Atributo que guarda la edad de una persona
     private int edad;
+    //Atributo que guarda el genero de una persona
     private String genero;
+    //Lista que guarda los antecedentes de una persona
     private List<Antecedentes> antecedentes;
+    //Constructor vacio 
     public Persona(){};
-
+    //Constructor de la clase
     public Persona(String nombre, int cedula, int edad, String genero, List<Antecedentes> antecedentes) {
         this.nombre = nombre;
         this.cedula = cedula;

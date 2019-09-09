@@ -6,8 +6,8 @@
 package com.udec.credito;
 
 /**
- *
- * @author tmore
+ * Clase que corre el programa
+ * @author @author Tatiana Moreno, Andres Chila
  */
 public class Main {
     public static void main(String[] args){

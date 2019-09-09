@@ -6,14 +6,17 @@
 package com.udec.credito;
 
 /**
- *
- * @author tmore
+ * Clase que guarda los atributos de el tipo de antecedente
+ * @author Tatiana Moreno, Andres Chila
  */
 public class TipoAntecedente {
+    //Atributo que guarda la descripcion de un tipo de antecendete 
     private String descripcion;
+    //Atributo que guarda un nombre caracteristico de un tipo de antecendete
     private String nombreCaracteristico;
+    //Atributo que guarda el tipo si es negativo o positivo de un tipo de antecendete
     private String tipo;
-
+    //Cosntructor de la clase
     public TipoAntecedente(String descripcion, String nombreCaracteristico, String tipo) {
         this.descripcion = descripcion;
         this.nombreCaracteristico = nombreCaracteristico;

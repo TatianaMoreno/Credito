@@ -8,14 +8,17 @@ package com.udec.credito;
 import java.util.Date;
 
 /**
- *
- * @author tmore
+ * Clase que guarda todo los atributos que pertence a los antecedentes
+ * @author Tatiana Moreno, Andres Chila
  */
 public class Antecedentes {
+    //Atributo que guarda la fecha del antecendente 
     private Date fecha;
+    //Atributo que guarda la descripcion del antecendente 
     private String descripcion;
+    //Atributo que guarda el tipo del antecendente 
     private TipoAntecedente tipo;
-
+    //Constructor de la clase
     public Antecedentes(Date fecha, String descripcion, TipoAntecedente tipo) {
         this.fecha = fecha;
         this.descripcion = descripcion;

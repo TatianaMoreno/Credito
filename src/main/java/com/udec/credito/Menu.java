@@ -18,29 +18,47 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 /**
- *
- * @author tmore
+ * Clase que guarda toda la logica del programa
+ * @author Tatiana Moreno, Andres Chila
  */
 public class Menu {
     // El while será ejecutado hasta que salir sea TRUE.
     private boolean salir = false;
+    //Atributo que guarad la opcion del menu
     private int opcion;
+    //Atributo que guarda la cedula
     private String cedula;
+    //Atributo que guarda el nombre
     private String nombre;
+    //Atributo que guarda la cedula
     private int cedu;
+    //Atributo que guarda la edad
     private int edad;
+    //Atributo que guarda el genero
     private String genero;
+    //Atributo que guarda la fecha del antecedente
     private Date fecha;
+    //Atributo que guarda la descripcion
     private String descripcion;
+    //Atributo que guarda la fehca como texto
     private String fechaComoTexto;
+    //Atributo que se usa para el genero
     private Byte o,e;
+    //Atributo que guarda el nombre caracteristico de un tipo de antecedente
     private String nombreCaracteristico;
+    //Atributo que guarda el tipo de antecedente
     private String tipo;
+    //Para el formato de la fecha
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+    //Se usa para leer lo que entra por consola
     Scanner sn = new Scanner(System.in);
+    //Se usa para leer lo que entra por consola
     Scanner cn = new Scanner(System.in);
+    //Lista que guarda las personas
     ArrayList<Persona> listaPersonas = new ArrayList<>();
+    //Lista qie guarda los tipos de antecedentes
     ArrayList<TipoAntecedente> listaTipoAntecedentes = new ArrayList<>();
+    
     public Menu() { 
         while (salir==false) {   
 
@@ -236,5 +254,9 @@ public class Menu {
         } catch (IOException ex) {
             Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public void lecturaArchivo(){
+        
     }
 }
