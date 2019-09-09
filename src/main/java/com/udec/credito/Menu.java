@@ -10,11 +10,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 import java.io.BufferedReader;
+import java.io.Serializable;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import static java.lang.Integer.parseInt;
 import java.text.ParseException;
 import java.util.List;
 import java.util.logging.Level;
@@ -264,7 +266,7 @@ public class Menu {
             File archivo = new File("Archivos/personas.txt");
             FileWriter escritura = new FileWriter(archivo,true);
             for(Persona p : listaPersonas){
-                escritura.write(p.getNombre()+","+p.getCedula()+","+p.getEdad()+","+p.getGenero()+";");
+                escritura.write(p.getNombre()+","+p.getCedula()+","+p.getEdad()+","+p.getGenero()+"; \n");
             }
             escritura.close();
             
@@ -272,8 +274,25 @@ public class Menu {
             Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    public void lecturaFichero() {
+        try{
+            File archivo= new File("Archivos/personas.txt");
+            FileReader lector = new FileReader(archivo);
+            BufferedReader br= new BufferedReader(lector);
+            String linea=br.readLine();
+            String palabra[]=linea.split(";");
+            int i;
+            for(i=0;i<palabra.length;i++){
+                String bufer[]=palabra[i].split(",");
+                Persona personl;
+                personl = new  Persona(bufer[0], parseInt(bufer[1]),parseInt(bufer[2]), bufer[3]/*,bufer[4]*/);
+                listaPersonas.add(personl);
+            }
+            
+                 
+        } catch (IOException ex) {
+            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    } 
     
-    public void lecturaArchivo(){
-        
-    }
 }
