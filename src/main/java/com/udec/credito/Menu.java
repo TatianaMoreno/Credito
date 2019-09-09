@@ -9,7 +9,14 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
-
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author tmore
@@ -31,6 +38,7 @@ public class Menu {
     private String tipo;
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
     Scanner sn = new Scanner(System.in);
+    Scanner cn = new Scanner(System.in);
     ArrayList<Persona> listaPersonas = new ArrayList<>();
     ArrayList<TipoAntecedente> listaTipoAntecedentes = new ArrayList<>();
     public Menu() { 
@@ -85,13 +93,15 @@ public class Menu {
         System.out.println("Edad:");
         edad=(sn.nextInt());
         System.out.println("Genero (1.Masculino 2.Femenino):");
-        sn.nextLine();
+        
         if((o =(sn.nextByte()))==1){
             genero="Masculino";
         }else if ((o =(sn.nextByte()))==2)
             genero="Femenino";
         Persona p =new Persona(nombre, cedu, edad, genero,null);
+        System.out.println("Se creo con exito");
         listaPersonas.add(p);
+        escrituraFichero();
     }
     //Metodo para editar a un usuario que solo permite cambiar la edad, nombre y genero.
     public void editarPersona(){
@@ -108,10 +118,12 @@ public class Menu {
                 System.out.println("Que gustaria editar en la persona\n 1.Nombre\n 2.Edad\n 3.Genero");
                 switch (o=sn.nextByte()) {
                     case 1: System.out.println("Nuevo nombre: ");
-                        p.setNombre(sn.nextLine());
+                        p.setNombre(cn.nextLine());
+                        System.out.println("Se cambio el nombre con exito");
                         break;
                     case 2:System.out.println("Nueva Edad:");
-                        p.setEdad(sn.nextInt());
+                        p.setEdad(cn.nextInt());
+                        System.out.println("Se cambio la edad con exito");
                         break;
                     case 3 :System.out.println("Nuevo genero (1.Masculino 2.Femenino):");
                         if((o =(sn.nextByte()))==1){
@@ -119,6 +131,7 @@ public class Menu {
                         }else if ((o =(sn.nextByte()))==2)
                             genero="Femenino";
                         p.setGenero(genero);
+                        System.out.println("Se cambio el genero con exito");
                         break;
                 }
             }
@@ -157,8 +170,7 @@ public class Menu {
                 System.out.println("Ingrese la fecha del antecedente (dia/mes/año): ");
                 fechaComoTexto  = sn.nextLine();
                 System.out.println("Ingrese la descripcion: "); descripcion= sn.nextLine();
-                System.out.println("Ingrese el tipo (Negativo/Positivo): "); tipo= sn.nextLine();
-                 
+                System.out.println("Ingrese el tipo: "); tipo= sn.nextLine();
                                 
             }
         }
@@ -210,5 +222,19 @@ public class Menu {
         System.out.println("Gracias por usar nuestro software");
         System.out.println("Saliendo del programa");
 
+    }
+    public void escrituraFichero(){
+        
+        try {
+            File archivo = new File("Archivos/personas.txt");
+            FileWriter escritura = new FileWriter(archivo,true);
+            for(Persona p : listaPersonas){
+                escritura.write(p.getNombre()+","+p.getCedula()+","+p.getEdad()+","+p.getGenero()+";");
+            }
+            escritura.close();
+            
+        } catch (IOException ex) {
+            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
