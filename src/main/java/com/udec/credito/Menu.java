@@ -61,15 +61,19 @@ public class Menu {
     //Se usa para leer lo que entra por consola
     Scanner cn = new Scanner(System.in);
     //Lista que guarda las personas
-    ArrayList<Persona> listaPersonas = new ArrayList<>();
+    List<Persona> listaPersonas;
     //Lista qie guarda los tipos de antecedentes
-    ArrayList<TipoAntecedente> listaTipoAntecedentes = new ArrayList<>();
+    List<TipoAntecedente> listaTipoAntecedentes ;
+    Persona persona= new Persona();
+    
     
     public Menu() { 
+        listaPersonas=(new Archivos().devolverPersona());
+         if(listaPersonas==null)
+             listaPersonas=new ArrayList();
         while (salir==false) {   
 
             // Le indicamos al usuario cuales son sus opciones:
-            lecturaFichero();
             System.out.println(" MENU DE  ");
 
             System.out.println(" 1 - Crear una persona. ");
@@ -105,7 +109,6 @@ public class Menu {
                     default:
                         System.out.println("Solo números entre 1 y 4");
             }
-            actualizarFichero();
                                 
         }
     }
@@ -125,9 +128,9 @@ public class Menu {
         }else if ((o =(sn.nextByte()))==2)
             genero="Femenino";
         Persona p =new Persona(nombre, cedu, edad, genero,null);
-        System.out.println("Se creo con exito");
         listaPersonas.add(p);
-        escrituraFichero();
+        (new Archivos()).crearArchivo(listaPersonas);
+        System.out.println("Se creo con exito");
     }
     
     //Metodo para editar a un usuario que solo permite cambiar la edad, nombre y genero.
@@ -162,7 +165,7 @@ public class Menu {
                         break;
                 }
             }
-        }
+        }(new Archivos()).crearArchivo(listaPersonas);
     }
     
     
@@ -180,6 +183,7 @@ public class Menu {
             tipo="Negativo";
         TipoAntecedente ta=new TipoAntecedente(descripcion,nombre, tipo);
         listaTipoAntecedentes.add(ta);
+            (new Archivos()).crearArchivoTipoA(listaTipoAntecedentes);    
     }
     
     public void agregarAntecedente() {
@@ -209,12 +213,11 @@ public class Menu {
                 System.out.println("Ingrese el tipo: "); 
                 edad  = sn.nextInt();
                 TipoAntecedente tipos=listaTipoAntecedentes.get(edad);
-                Antecedentes an = new Antecedentes(fecha, descripcion, tipos);
-                List<Antecedentes> antecedentes=p.getAntecedentes();
-                antecedentes.add(an);
+                List<Antecedentes> antecedentes=persona.getAntecedentes();
+                antecedentes.add(new Antecedentes(fecha, descripcion, tipos));
                 p.setAntecedentes(antecedentes);
-                escrituraAntecedentesFichero();
-                
+                listaPersonas.add(p);
+                (new Archivos()).crearArchivo(listaPersonas);               
             }
         }
     }
@@ -266,73 +269,6 @@ public class Menu {
         System.out.println("Saliendo del programa");
 
     }
-    public void escrituraFichero(){
-        
-        try {
-            File archivo = new File("Archivos/personas.txt");
-            FileWriter escritura = new FileWriter(archivo,true);
-            for(Persona p : listaPersonas){
-                escritura.write(p.getNombre()+","+p.getCedula()+","+p.getEdad()+","+p.getGenero()+";");
-            }
-            escritura.close();
-            
-        } catch (IOException ex) {
-            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
     
-    public void escrituraAntecedentesFichero(){
-        
-        try {
-            File archivo = new File("Archivos/personas.txt");
-            FileWriter escritura = new FileWriter(archivo,true);
-            for(Persona p : listaPersonas){
-                escritura.write(p.getNombre()+","+p.getCedula()+","+p.getEdad()+","+p.getGenero()+","+p.getAntecedentes()+"; \n");
-            }
-            escritura.close();
-            
-        } catch (IOException ex) {
-            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-     
-    
-    
-    public List<Persona> lecturaFichero(){
-
-            List<Persona> listaPersona=null;
-
-            try{
-
-                FileInputStream archivo=new FileInputStream("Archivos/personas");
-
-                ObjectInputStream objeto=new ObjectInputStream(archivo);
-
-                listaPersona=(ArrayList) objeto.readObject();
-
-                objeto.close();
-
-                archivo.close();
-
-            }catch (IOException | ClassNotFoundException io){
-
-            }
-
-           return listaPersona;          
-
-        }
-    public void actualizarFichero(){
-        try {
-            File archivo = new File("Archivos/personas.txt");
-            try (FileWriter escritura = new FileWriter(archivo,false)) {
-                for(Persona p : listaPersonas){
-                    escritura.write(p.getNombre()+","+p.getCedula()+","+p.getEdad()+","+p.getGenero()+"; \n");
-                }
-            }
-            
-        } catch (IOException ex) {
-            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
     
 }
