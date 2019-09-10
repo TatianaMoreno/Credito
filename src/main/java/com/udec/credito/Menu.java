@@ -260,7 +260,7 @@ public class Menu {
                     System.out.println("No se pueden eliminar los antecedentes positivos.");   
             }
             
-        }
+        }(new Archivos()).crearArchivo(listaPersonas);
     }
     
     public void salir(){
