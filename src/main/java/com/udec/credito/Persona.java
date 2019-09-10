@@ -5,6 +5,7 @@
  */
 package com.udec.credito;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -13,7 +14,7 @@ import java.util.Scanner;
  * Clase que se guarda los atributos de una persona
  * @author @author Tatiana Moreno, Andres Chila
  */
-public class Persona {
+public class Persona implements Serializable{
     //Atributo que guarda el nombre de una persona
     private String nombre;
     //Atributo que guarda la cedula de una persona

@@ -5,13 +5,14 @@
  */
 package com.udec.credito;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Clase que guarda todo los atributos que pertence a los antecedentes
  * @author Tatiana Moreno, Andres Chila
  */
-public class Antecedentes {
+public class Antecedentes implements Serializable{
     //Atributo que guarda la fecha del antecendente 
     private Date fecha;
     //Atributo que guarda la descripcion del antecendente 

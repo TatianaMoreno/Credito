@@ -59,7 +59,7 @@ public class Archivos {
 
         try{
 
-            FileInputStream archivo=new FileInputStream("Archivos/listaTipoAntecedentes");
+            FileInputStream archivo=new FileInputStream("Archivo/listaTipoAntecedentes");
             ObjectInputStream objeto=new ObjectInputStream(archivo);
             listaTiposAntecedentes=(ArrayList) objeto.readObject();
             objeto.close();
@@ -74,7 +74,7 @@ public class Archivos {
 
         try{
 
-            File arch=new File("sArchivos/listaTipoAntecedentes");
+            File arch=new File("Archivo/listaTipoAntecedentes");
             if (!arch.exists()) 
 		arch.createNewFile();
             FileOutputStream archivo=new FileOutputStream(arch);

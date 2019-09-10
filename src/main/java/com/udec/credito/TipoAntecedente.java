@@ -5,11 +5,13 @@
  */
 package com.udec.credito;
 
+import java.io.Serializable;
+
 /**
  * Clase que guarda los atributos de el tipo de antecedente
  * @author Tatiana Moreno, Andres Chila
  */
-public class TipoAntecedente {
+public class TipoAntecedente implements Serializable{
     //Atributo que guarda la descripcion de un tipo de antecendete 
     private String descripcion;
     //Atributo que guarda un nombre caracteristico de un tipo de antecendete
