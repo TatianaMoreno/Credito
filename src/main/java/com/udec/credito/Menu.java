@@ -12,10 +12,12 @@ import java.util.Scanner;
 import java.io.BufferedReader;
 import java.io.Serializable;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import static java.lang.Integer.parseInt;
 import java.text.ParseException;
 import java.util.List;
@@ -293,34 +295,40 @@ public class Menu {
             Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    public void lecturaFichero() {
-        try{
-            File archivo= new File("Archivos/personas.txt");
-            FileReader lector = new FileReader(archivo);
-            BufferedReader br= new BufferedReader(lector);
-            String linea=br.readLine();
-            String palabra[]=linea.split(";");
-            int i;
-            for(i=0;i<palabra.length;i++){
-                String bufer[]=palabra[i].split(",");
-                Persona personl;
-                personl = new  Persona(bufer[0], parseInt(bufer[1]),parseInt(bufer[2]), bufer[3],(List<Antecedentes>). bufer[4]);
-                listaPersonas.add(personl);
+     
+    
+    
+    public List<Persona> lecturaFichero(){
+
+            List<Persona> listaPersona=null;
+
+            try{
+
+                FileInputStream archivo=new FileInputStream("Archivos/personas");
+
+                ObjectInputStream objeto=new ObjectInputStream(archivo);
+
+                listaPersona=(ArrayList) objeto.readObject();
+
+                objeto.close();
+
+                archivo.close();
+
+            }catch (IOException | ClassNotFoundException io){
+
             }
-            
-                 
-        } catch (IOException ex) {
-            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+
+           return listaPersona;          
+
         }
-    } 
     public void actualizarFichero(){
         try {
             File archivo = new File("Archivos/personas.txt");
-            FileWriter escritura = new FileWriter(archivo,false);
-            for(Persona p : listaPersonas){
-                escritura.write(p.getNombre()+","+p.getCedula()+","+p.getEdad()+","+p.getGenero()+"; \n");
+            try (FileWriter escritura = new FileWriter(archivo,false)) {
+                for(Persona p : listaPersonas){
+                    escritura.write(p.getNombre()+","+p.getCedula()+","+p.getEdad()+","+p.getGenero()+"; \n");
+                }
             }
-            escritura.close();
             
         } catch (IOException ex) {
             Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
