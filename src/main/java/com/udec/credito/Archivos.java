@@ -44,7 +44,7 @@ public class Archivos {
             try{
                 FileInputStream archivo=new FileInputStream("Archivo/persona");
                 ObjectInputStream objeto=new ObjectInputStream(archivo);
-                listaPersonas=(ArrayList) objeto.readObject();
+                listaPersonas=(List) objeto.readObject();
                 objeto.close();
                 archivo.close();
             }catch (IOException | ClassNotFoundException io){

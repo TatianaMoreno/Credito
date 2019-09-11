@@ -229,7 +229,7 @@ public class Menu {
                 System.out.println("Ingrese la descripcion: ");
                 descripcion = cn.nextLine();
 
-                System.out.println("Ingrese el tipo: ");
+                System.out.println("Ingrese el tipo(1/2): ");
                 TipoAntecedente tipos = listaTipoAntecedentes.get(sn.nextInt()-1);
                 List<Antecedentes> antecedentes = persona.getAntecedentes();
                 if(antecedentes == null){
@@ -255,7 +255,7 @@ public class Menu {
                 System.out.println("Cedula: " + p.getCedula());
                 System.out.println("Edad: " + p.getEdad());
                 System.out.println("Genero: " + p.getGenero());
-                System.out.println("Antecedentes: " + p.getAntecedentes());
+                //Poner el for para recorrer la lista de antecedentes
             }
         }
     }
