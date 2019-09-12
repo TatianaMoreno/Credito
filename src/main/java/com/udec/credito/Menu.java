@@ -53,7 +53,8 @@ public class Menu {
     //Atributo que guarda la fehca como texto
     private String fechaComoTexto;
     //Atributo que se usa para el genero
-    private Byte seleccion;
+    private Byte seleccion, contador=1;
+    private int seleccionado;
     //Atributo que guarda el nombre caracteristico de un tipo de antecedente
     private String nombreCaracteristico;
     //Atributo que guarda el tipo de antecedente
@@ -255,7 +256,15 @@ public class Menu {
                 System.out.println("Cedula: " + p.getCedula());
                 System.out.println("Edad: " + p.getEdad());
                 System.out.println("Genero: " + p.getGenero());
-                //Poner el for para recorrer la lista de antecedentes
+                System.out.println("Antecedentes: ");
+                for(Antecedentes a : p.getAntecedentes()){
+                    System.out.println(a.getDescripcion());
+                    System.out.println(a.getFecha());
+                    System.out.println(a.getTipo().getTipo());
+                    System.out.println(a.getTipo().getNombreCaracteristico());
+                    System.out.println(a.getTipo().getDescripcion());
+                }
+                break;
             }
         }
     }
@@ -271,14 +280,25 @@ public class Menu {
                 System.out.println("Cedula: " + p.getCedula());
                 System.out.println("Edad: " + p.getEdad());
                 System.out.println("Genero: " + p.getGenero());
-                System.out.println("Antecedentes: " + p.getAntecedentes());
+                System.out.println("Antecedentes: ");
+                for(Antecedentes a : p.getAntecedentes()){
+                    System.out.println(contador+"------------------");
+                    System.out.println(a.getDescripcion());
+                    System.out.println(a.getFecha());
+                    System.out.println(a.getTipo().getTipo());
+                    System.out.println(a.getTipo().getNombreCaracteristico());
+                    System.out.println(a.getTipo().getDescripcion());
+                    contador++;
+                }
                 System.out.println("Cual antecedente desea eliminar: ");
-                edad = sn.nextInt();
-                if ("Negativo".equals(p.getAntecedentes().get(edad).getTipo().getTipo())) {
-                    p.getAntecedentes().remove(edad);
+                seleccionado = sn.nextInt();
+                if ("Negativo".equals(p.getAntecedentes().get(seleccionado-1).getTipo().getTipo())) {
+                    p.getAntecedentes().remove(seleccionado-1);
                     System.out.println("Se elimino con exito.");
+                    contador=1;
                 } else {
                     System.out.println("No se pueden eliminar los antecedentes positivos.");
+                    contador=1;
                 }
             }
 
