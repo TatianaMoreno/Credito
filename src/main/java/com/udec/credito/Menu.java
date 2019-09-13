@@ -232,7 +232,7 @@ public class Menu {
 
                 System.out.println("Ingrese el tipo(1/2): ");
                 TipoAntecedente tipos = listaTipoAntecedentes.get(sn.nextInt()-1);
-                List<Antecedentes> antecedentes = persona.getAntecedentes();
+                List<Antecedentes> antecedentes = p.getAntecedentes();
                 if(antecedentes == null){
                     antecedentes = new ArrayList<>();
                 }
@@ -296,9 +296,11 @@ public class Menu {
                     p.getAntecedentes().remove(seleccionado-1);
                     System.out.println("Se elimino con exito.");
                     contador=1;
+                    break;
                 } else {
                     System.out.println("No se pueden eliminar los antecedentes positivos.");
                     contador=1;
+                    break;
                 }
             }
 
